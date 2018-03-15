@@ -27,6 +27,35 @@ polls.php
 
 ```paginate``` - count items returned from api    
 
+## Objects
+
+### POLL
+    {
+        'id'        : integer,
+        'title'     : string
+        'active'    : boolean [0|1],
+        'anonymous' : boolean [0|1],
+        'position'  : integer,
+        'type'      : string,
+        'closed_at' : datetime
+    }
+
+Where type is type of Poll:
+
+User can get only one Vote (like radio):
+
+- \\OrangeShadow\\Polls\\Types\\SingleVote
+
+
+User can check some option (like checkbox)    
+        
+- \\OrangeShadow\\Polls\\Types\\MultiVote
+
+
+User must specified order by priority
+
+- \\OrangeShadow\\Polls\\Types\\VariableVote
+ 
 
 ## Routes
 
@@ -58,9 +87,9 @@ admin route:
 public vote (only for auth user)
  
     POST: poll/{poll}/vote
-    FORM-PARAMS [
+    FORM-DATA: {
         options: array 
-    ]
+    }
    
    
     
