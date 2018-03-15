@@ -13,7 +13,7 @@ run migration
 ```php artisan migrate```
 
 
-##Config
+## Config
 
 polls.php
 
@@ -28,7 +28,7 @@ polls.php
 ```paginate``` - count items returned from api    
 
 
-##Routes
+## Routes
 
 admin route:
        
