@@ -44,17 +44,17 @@ Where type is type of Poll:
 
 User can get only one Vote (like radio):
 
-- \\OrangeShadow\\Polls\\Types\\SingleVote
+- ```\\OrangeShadow\\Polls\\Types\\SingleVote```
 
 
 User can check some option (like checkbox)    
         
-- \\OrangeShadow\\Polls\\Types\\MultiVote
+- ```\\OrangeShadow\\Polls\\Types\\MultiVote```
 
 
 User must specified order by priority
 
-- \\OrangeShadow\\Polls\\Types\\VariableVote
+- ```\\OrangeShadow\\Polls\\Types\\VariableVote```
  
 
 ## Routes
