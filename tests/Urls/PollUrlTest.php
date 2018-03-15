@@ -127,8 +127,6 @@ class PollUrlTest extends TestCase
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 
-        print_r($result->getContent());
-
         $result->assertJsonFragment($data);
         $result->assertJsonFragment($data1);
 
