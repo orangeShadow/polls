@@ -31,6 +31,10 @@ class Poll extends Model
 
     public function scopeSearch($query, $request)
     {
+        if ($request->has('id')) {
+            $query->where('id', $request->get('id'));
+        }
+
         if ($request->has('active')) {
             $query->where('active', $request->get('active'));
         }
