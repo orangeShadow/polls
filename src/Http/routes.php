@@ -1,15 +1,17 @@
 <?php
 
-$prefix = config('polls.route_prefix');
-$middleware = array_merge(config('polls.admin_route_middleware'),['bindings']);
+$admin_prefix = config('polls.admin_route_prefix');
+$admin_middleware = array_merge(config('polls.admin_route_middleware'),['bindings']);
+
+$public_prefix = config('polls.admin_route_prefix');
+$public_middleware = array_merge(config('polls.public_route_middleware'),['auth','bindings']);
 
 Route::group([
     'namespace' => 'OrangeShadow\Polls\Http\Controllers',
-    'prefix' => $prefix,
-    'middleware' => $middleware
+    'prefix' => $admin_prefix,
+    'middleware' => $admin_middleware
 ], function() {
     Route::post('poll/{poll}/close','PollController@close');
-    Route::post('poll/{poll}/vote','VoteController@vote');
 
     Route::get('poll','PollController@index')->name('poll.index');
     Route::post('poll','PollController@store')->name('poll.store');
@@ -22,6 +24,12 @@ Route::group([
     Route::get('option/{option}','OptionController@show')->name('option.show');
     Route::put('option/{option}','OptionController@update')->name('option.update');
     Route::delete('option/{option}','OptionController@delete')->name('option.update');
+});
 
-
+Route::group([
+    'namespace' => 'OrangeShadow\Polls\Http\Controllers',
+    'prefix' => $public_prefix,
+    'middleware' => $public_middleware
+], function() {
+    Route::post('poll/{poll}/vote','VoteController@vote');
 });

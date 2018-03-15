@@ -1,8 +1,12 @@
 <?php
 
 return [
-    'route_prefix'           => '',
+    'admin_route_prefix'           => '',
     'admin_route_middleware' => [
+        'auth'
+    ],
+    'public_route_prefix'           => '',
+    'public_route_middleware' => [
         'auth'
     ],
     'paginate'               => 50,
