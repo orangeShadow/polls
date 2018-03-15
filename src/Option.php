@@ -19,6 +19,10 @@ class Option extends Model
 
     public $timestamps = false;
 
+    /**
+     * @param $query
+     * @param Request $request
+     */
     public function scopeSearch($query,Request $request)
     {
         if ( $request->has('poll_id') ) {
@@ -34,8 +38,11 @@ class Option extends Model
         }
     }
 
-    public function pool()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function poll()
     {
-        return $this->belongsTo(OrangeShadow\Polls\Poll);
+        return $this->belongsTo(Poll::class);
     }
 }

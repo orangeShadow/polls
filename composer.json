@@ -1,6 +1,6 @@
 {
     "name": "orangeshadow/polls",
-    "description": "package for making polls",
+    "description": "A Laravel package to create your polls",
     "keywords": ["laravel", "vote", "polls"],
     "license": "MIT",
     "authors": [
