@@ -1,0 +1,41 @@
+{
+    "name": "orangeshadow/polls",
+    "description": "package for making polls",
+    "keywords": ["laravel", "vote", "polls"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Alexeev",
+            "email": "alexeev.sker@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/routing": "5.5.x|5.6.x",
+        "illuminate/session": "5.5.x|5.6.x",
+        "illuminate/support": "5.5.x|5.6.x"
+    },
+    "autoload": {
+        "psr-4": {
+            "OrangeShadow\\Polls\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OrangeShadow\\Polls\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OrangeShadow\\Polls\\ServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "^7.0"
+    }
+}
