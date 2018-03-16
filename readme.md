@@ -2,7 +2,7 @@
 
 ## Install 
 
-```composer require orangeshadow/polls```
+```composer require orangeshadow/polls:dev-master```
 
 then copy config, migration and lang
  
