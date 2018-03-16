@@ -1,10 +1,22 @@
 <?php
 
 $admin_prefix = config('polls.admin_route_prefix');
-$admin_middleware = array_merge(config('polls.admin_route_middleware'),['bindings']);
+
+if (is_array(config('polls.admin_route_middleware'))) {
+    $admin_middleware = array_merge(config('polls.admin_route_middleware'),['bindings']);
+} else {
+    $admin_middleware = ['bindings'];
+}
+
 
 $public_prefix = config('polls.admin_route_prefix');
-$public_middleware = array_merge(config('polls.public_route_middleware'),['auth','bindings']);
+
+if (is_array(config('polls.admin_route_middleware'))) {
+    $public_middleware = array_merge(config('polls.public_route_middleware'),['auth','bindings']);
+} else {
+    $public_middleware = ['bindings'];
+}
+
 
 Route::group([
     'namespace' => 'OrangeShadow\Polls\Http\Controllers',
