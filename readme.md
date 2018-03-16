@@ -32,7 +32,9 @@ polls.php
 ## Routes
 
 admin route:
-       
+
+[Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API)  
+    
     GET: /poll - Get poll list
     
     POST: /poll - Store Poll  
@@ -41,10 +43,12 @@ admin route:
                
     PUT: /poll/{poll} - Update poll
                   
-    DELETE: /poll/{poll} - Delete poll
-    
+    DELETE: /poll/{poll} - Remove poll
+       
     POST: /poll/{poll}/close - Close Poll
 
+[Option API](https://github.com/orangeShadow/polls/wiki/Option-API)
+    
     GET: /option - Get option list
     
     POST: /option - Store Option
@@ -53,11 +57,13 @@ admin route:
     
     PUT: /option/{option} - Update option
     
-    DELETE: /option/{option}  Remoce option
+    DELETE: /option/{option}  Remove option
  
    
 public vote (only for auth user)
- 
+
+[Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API) 
+
     POST: poll/{poll}/vote
     FORM-DATA: {
         options: array 

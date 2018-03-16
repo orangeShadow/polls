@@ -39,7 +39,7 @@ class VoteController extends Controller
             return response(['error'=>true,'message'=>$e->getMessage()],500);
         }
 
-        return response(['success' => true]);
+        return response(['success' => true,'results'=>$pollWriter->getResult()]);
 
     }
 

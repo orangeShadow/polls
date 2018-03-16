@@ -77,10 +77,11 @@ class VoteUrl extends TestCase
 
         $options = $options->shuffle()->pluck('id')->toArray();
 
-        $this->actingAs($this->user)->post("/poll/{$this->pollVariable->id}/vote", [
+        $results = $this->actingAs($this->user)->post("/poll/{$this->pollVariable->id}/vote", [
             'options' => $options,
             'Accept' => 'application/json'
         ])->assertJson(['success' => true])->assertStatus(200);
+
 
         foreach ($options as $key => $option) {
             $this->assertDatabaseHas('votes', [

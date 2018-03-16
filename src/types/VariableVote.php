@@ -66,10 +66,10 @@ class VariableVote extends PollTypeAbstract
         $votersCount = $this->poll->getVoterCount();
         $maxWeight = $this->poll->options->count();
 
-        $results = array_map(function($item) use ($votersCount,$maxWeight){
+        $results = array_map(function($item) use ($votersCount, $maxWeight){
 
             if($item['total_weight']>0) {
-                $item['percent'] = round($item['total_weight']/($votersCount*$maxWeight),4)*100;
+                $item['percent'] = round( $item['total_weight']/($votersCount*$maxWeight),4)*100;
             } else{
                 $item['percent'] = 0;
             }

@@ -25,6 +25,10 @@ class Option extends Model
      */
     public function scopeSearch($query,Request $request)
     {
+        if ( $request->has('id') ) {
+            $query->where('id',$request->get('id'));
+        }
+
         if ( $request->has('poll_id') ) {
             $query->where('poll_id',$request->get('poll_id'));
         }
