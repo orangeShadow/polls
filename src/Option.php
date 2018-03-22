@@ -12,6 +12,12 @@ class Option extends Model
         'position'
     ];
 
+    protected $appends = [
+        'votesCount',
+        'totalWeight'
+    ];
+
+
     public $casts = [
         'poll_id'   => 'integer',
         'position'  => 'integer'
@@ -20,8 +26,12 @@ class Option extends Model
     public $timestamps = false;
 
     /**
+     * Search
+     *
      * @param $query
      * @param Request $request
+     *
+     * @return $query
      */
     public function scopeSearch($query,Request $request)
     {
@@ -40,13 +50,47 @@ class Option extends Model
         if ( $request->has('title') ) {
             $query->where('title','like',"%{$request->get('title')}%");
         }
+
+        $query->orderBy('position','ASC');
+        
+        return $query;
     }
 
     /**
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function poll()
     {
         return $this->belongsTo(Poll::class);
+    }
+
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    /**
+     * Get Votes count
+     * 
+     * @return int
+     */
+    public function getVotesCountAttribute()
+    {
+        return $this->votes()->count();
+    }
+
+    /**
+     * Get Votes count
+     * 
+     * @return int
+     */
+    public function getTotalWeightAttribute()
+    {
+        return $this->votes->sum('weight');
     }
 }

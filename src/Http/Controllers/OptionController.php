@@ -18,7 +18,7 @@ class OptionController extends Controller
 
     /**
      * Set translate for attributes
-     * 
+     *
      * @return array
      */
     public function customAttributes()
@@ -32,9 +32,9 @@ class OptionController extends Controller
 
     /**
      * List of option
-     * 
-     * @param \Illuminate\Http\Request $request 
-     *    
+     *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
@@ -52,9 +52,9 @@ class OptionController extends Controller
 
     /**
      * Store option
-     * 
-     * @param \Illuminate\Http\Request $request 
-     * 
+     *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function store(Request $request)
@@ -67,8 +67,8 @@ class OptionController extends Controller
 
     /**
      * Get option
-     * 
-     * @param Option $option 
+     *
+     * @param Option $option
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
@@ -80,9 +80,9 @@ class OptionController extends Controller
 
     /**
      * Update option
-     * 
-     * @param Option  $option    
-     * @param Request $request 
+     *
+     * @param Option  $option
+     * @param Request $request
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
@@ -96,8 +96,8 @@ class OptionController extends Controller
 
     /**
      * Delete option
-     * 
-     * @param int $id 
+     *
+     * @param int $id
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
