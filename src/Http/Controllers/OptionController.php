@@ -16,6 +16,11 @@ class OptionController extends Controller
         'position' => 'nullable | integer',
     ];
 
+    /**
+     * Set translate for attributes
+     * 
+     * @return array
+     */
     public function customAttributes()
     {
         return [
@@ -27,12 +32,16 @@ class OptionController extends Controller
 
     /**
      * List of option
+     * 
+     * @param \Illuminate\Http\Request $request 
+     *    
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request)
     {
 
         if ($request->has('all')) {
-            $data = Option::search($request)->all();
+            $data = Option::search($request)->get();
         } else {
             $data = Option::search($request)->paginate(config('polls.paginate'));
         }
@@ -43,6 +52,10 @@ class OptionController extends Controller
 
     /**
      * Store option
+     * 
+     * @param \Illuminate\Http\Request $request 
+     * 
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function store(Request $request)
     {
@@ -54,7 +67,8 @@ class OptionController extends Controller
 
     /**
      * Get option
-     * @param Option $option
+     * 
+     * @param Option $option 
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
@@ -66,7 +80,9 @@ class OptionController extends Controller
 
     /**
      * Update option
-     * @param $option
+     * 
+     * @param Option  $option    
+     * @param Request $request 
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
@@ -80,7 +96,8 @@ class OptionController extends Controller
 
     /**
      * Delete option
-     * @param $id
+     * 
+     * @param int $id 
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
