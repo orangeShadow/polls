@@ -73,12 +73,22 @@ class PollController extends Controller
 
     /**
      * Update poll
+     * 
+     * @param App\Poll $poll
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function update(Poll $poll, Request $request)
-    {;
+    {
         $this->validate($request, $this->validateFields, [], $this->customAttributes());
 
         $poll->fill($request->all());
+
+        if ($request->has('closed_at') && empty($request->get('closed_at'))) {
+            $poll->closed_at = null;
+        }
+
         $poll->save();
 
         return response($poll);

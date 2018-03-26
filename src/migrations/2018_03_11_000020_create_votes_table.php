@@ -24,8 +24,8 @@ class CreateVotesTable extends Migration
             $table->smallInteger('weight')->default(1);
 
             $table->unique(['user_id','option_id']);
-            $table->foreign('option_id')->references('id')->on('options')->onUpdate('cascade')->onDelete('cascade');;
-            $table->foreign('user_id')->references($users_primary_key)->on($users_table)->onUpdate('cascade')->onDelete('cascade');;
+            $table->foreign('option_id')->references('id')->on('options')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references($users_primary_key)->on($users_table)->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
