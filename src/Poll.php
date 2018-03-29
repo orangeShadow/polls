@@ -28,7 +28,11 @@ class Poll extends Model
 
 
 
-
+    /**
+     * Scope for data filter
+     * @param $query
+     * @param Illuminate\Http\Request $request 
+     */
     public function scopeSearch($query, $request)
     {
         if ($request->has('id')) {

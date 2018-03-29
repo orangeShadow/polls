@@ -42,6 +42,9 @@ Route::group([
     'namespace' => 'OrangeShadow\Polls\Http\Controllers',
     'prefix' => $public_prefix,
     'middleware' => $public_middleware
-], function() {
+], function() use ($admin_prefix, $public_prefix){
+    if($admin_prefix != $public_prefix) {
+        Route::get('poll/{poll}','PollController@show');            
+    }
     Route::post('poll/{poll}/vote','VoteController@vote');
 });

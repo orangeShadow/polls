@@ -63,11 +63,14 @@ class PollController extends Controller
 
     /**
      * Show poll
-     * @param $id
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * 
+     * @param \OrangeShadow\Polls\Poll $poll 
+     * 
+     * @return \Illuminate\Contracts\Routing\ResponseFactory 
      */
     public function show(Poll $poll)
     {
+        $poll->with('option');
         return response($poll);
     }
 
