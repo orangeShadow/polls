@@ -26,7 +26,13 @@ class Poll extends Model
         'closed_at' => 'datetime'
     ];
 
+    public $appends = [
+        'optionList'
+    ];
 
+    public $hidden = [
+        'options'
+    ];
 
     /**
      * Scope for data filter
@@ -69,9 +75,18 @@ class Poll extends Model
 
     }
 
+
     public function options()
     {
         return $this->hasMany(Option::class);
+    }
+
+    public function getOptionListAttribute()
+    {
+        return $this->options
+                    ->map( function($item) {
+                        return ['id'=>$item->id, 'title' => $item->title];
+                    });
     }
 
 
