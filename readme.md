@@ -35,31 +35,37 @@ admin route:
 
 [Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API)  
     
-    GET: /poll - Get poll list
+    GET: /admin/poll - Get poll list
     
-    POST: /poll - Store Poll  
+    POST: /admin/poll - Store Poll  
       
-    GET: /poll/{poll} - Show poll
+    GET: /admin/poll/{poll} - Show poll
                
-    PUT: /poll/{poll} - Update poll
+    PUT: /admin/poll/{poll} - Update poll
                   
-    DELETE: /poll/{poll} - Remove poll
+    DELETE: /admin/poll/{poll} - Remove poll
        
-    POST: /poll/{poll}/close - Close Poll
+    POST: /admin/poll/{poll}/close - Close Poll
 
 [Option API](https://github.com/orangeShadow/polls/wiki/Option-API)
     
-    GET: /option - Get option list
+    GET: /admin/option - Get option list
     
-    POST: /option - Store Option
+    POST: /admin/option - Store Option
     
-    GET: /option/{option} - Show option
+    GET: /admin/option/{option} - Show option
     
-    PUT: /option/{option} - Update option
+    PUT: /admin/option/{option} - Update option
     
-    DELETE: /option/{option}  Remove option
+    DELETE: /admin/option/{option}  Remove option
  
    
+public get vote with options and result if user did voted
+
+[Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API) 
+
+    POST: poll/{poll}
+    
 public vote (only for auth user)
 
 [Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API) 
