@@ -70,7 +70,7 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        $poll->with('option');
+        $poll->options;
         return response($poll);
     }
 
