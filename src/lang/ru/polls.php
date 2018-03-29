@@ -14,7 +14,7 @@ return [
 
     'vote.option_id' => 'Вариант ответа',
     'vote.wight'     => 'Вес ответа',
-
+    'vote.options'   => 'Ответы',
     'OptionIsNotFound'           => 'Вариант не найден.',
     'PollIsClosed'               => 'Опрос закрыт.',
     'AlreadyCastYourVote'        => 'Вы уже отдали свой голос.',

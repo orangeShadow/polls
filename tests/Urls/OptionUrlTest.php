@@ -36,7 +36,7 @@ class OptionUrl extends TestCase
             'position'  => 1
         ];
 
-        $this->actingAs($this->user)->post('/option', $data, [
+        $this->actingAs($this->user)->post('/'.config('polls.admin_route_prefix').'/option', $data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 
@@ -56,7 +56,7 @@ class OptionUrl extends TestCase
         $option =  Option::create($data);
 
 
-        $this->actingAs($this->user)->get('/option/'.$option->id, [
+        $this->actingAs($this->user)->get('/'.config('polls.admin_route_prefix')."/option/".$option->id, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson($data);
     }
@@ -73,7 +73,7 @@ class OptionUrl extends TestCase
 
         $data['title'] = 'Ronaldo';
 
-        $this->actingAs($this->user)->put('/option/'.$option->id,$data, [
+        $this->actingAs($this->user)->put('/'.config('polls.admin_route_prefix').'/option/'.$option->id,$data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson($data);
 
@@ -91,7 +91,7 @@ class OptionUrl extends TestCase
         $option = Option::create ($data);
 
 
-        $this->actingAs($this->user)->delete('/option/'.$option->id,$data, [
+        $this->actingAs($this->user)->delete('/'.config('polls.admin_route_prefix').'/option/'.$option->id,$data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson(['success'=>true]);
 
@@ -119,7 +119,7 @@ class OptionUrl extends TestCase
         Option::create ($data1);
 
 
-        $result = $this->actingAs($this->user)->get('/option',[
+        $result = $this->actingAs($this->user)->get('/'.config('polls.admin_route_prefix').'/option',[
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 
@@ -186,7 +186,7 @@ class OptionUrl extends TestCase
         Option::create ($wData3);
 
 
-        $result = $this->actingAs($this->user)->get('/option?poll_id='.$this->poll->id,[
+        $result = $this->actingAs($this->user)->get('/'.config('polls.admin_route_prefix').'/option?poll_id='.$this->poll->id,[
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 

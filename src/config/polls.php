@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin_route_prefix'           => '',
+    'admin_route_prefix'           => 'admin',
     'admin_route_middleware' => [
         'auth'
     ],

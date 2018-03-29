@@ -15,7 +15,7 @@ class VoteController extends Controller
     public function customAttributes()
     {
         return [
-            'options' => trans('polls.vote.option'),
+            'options' => trans('polls.vote.options'),
         ];
     }
 

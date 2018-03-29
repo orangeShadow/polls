@@ -23,7 +23,7 @@ class PollUrlTest extends TestCase
 
         $user = User::find(1);
 
-        $this->actingAs($user)->post('/poll', $data, [
+        $this->actingAs($user)->post('/'.config('polls.admin_route_prefix').'/poll', $data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 
@@ -45,7 +45,7 @@ class PollUrlTest extends TestCase
 
         $user = User::find(1);
 
-        $this->actingAs($user)->get('/poll/'.$poll->id, [
+        $this->actingAs($user)->get('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson($data);
     }
@@ -67,7 +67,7 @@ class PollUrlTest extends TestCase
 
         $data['title'] = 'Who is the best football player in the world?';
 
-        $this->actingAs($user)->put('/poll/'.$poll->id,$data, [
+        $this->actingAs($user)->put('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id,$data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson($data);
 
@@ -90,7 +90,7 @@ class PollUrlTest extends TestCase
         $user = User::find(1);
 
 
-        $this->actingAs($user)->delete('/poll/'.$poll->id,$data, [
+        $this->actingAs($user)->delete('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id,$data, [
             'Accept'        => 'application/json'
         ])->assertStatus(200)->assertJson(['success'=>true]);
 
@@ -123,7 +123,7 @@ class PollUrlTest extends TestCase
         $user = User::find(1);
 
 
-        $result = $this->actingAs($user)->get('/poll',[
+        $result = $this->actingAs($user)->get('/'.config('polls.admin_route_prefix').'/poll',[
             'Accept'        => 'application/json'
         ])->assertStatus(200);
 

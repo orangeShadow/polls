@@ -43,8 +43,6 @@ Route::group([
     'prefix' => $public_prefix,
     'middleware' => $public_middleware
 ], function() use ($admin_prefix, $public_prefix){
-    if($admin_prefix != $public_prefix) {
-        Route::get('poll/{poll}','PollController@show');            
-    }
+    Route::get('poll/{poll}','PollController@showPublic');             
     Route::post('poll/{poll}/vote','VoteController@vote');
 });

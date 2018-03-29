@@ -68,9 +68,32 @@ class PollController extends Controller
      * 
      * @return \Illuminate\Contracts\Routing\ResponseFactory 
      */
-    public function show(Poll $poll)
-    {
+    public function show(Poll $poll,Request $request)
+    {                
         return response($poll);
+    }
+
+    /**
+     * Show poll
+     * 
+     * @param \OrangeShadow\Polls\Poll $poll 
+     * 
+     * @return \Illuminate\Contracts\Routing\ResponseFactory 
+     */
+    public function showPublic(Poll $poll,Request $request)
+    {                
+        $pollArray = $poll->toArray();            
+        $response = [
+            'poll'    => $pollArray,
+            'options' => $poll->getOptionList(),            
+        ];
+
+        if ($poll->hasVoted($request->user())) {
+            $response['results'] = app()->make('PollProxy', ['poll' => $poll])
+                                        ->getResult();
+        }
+
+        return response($response);
     }
 
     /**

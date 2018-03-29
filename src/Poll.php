@@ -26,14 +26,6 @@ class Poll extends Model
         'closed_at' => 'datetime'
     ];
 
-    public $appends = [
-        'optionList'
-    ];
-
-    public $hidden = [
-        'options'
-    ];
-
     /**
      * Scope for data filter
      * @param $query
@@ -75,13 +67,13 @@ class Poll extends Model
 
     }
 
-
+  
     public function options()
     {
         return $this->hasMany(Option::class);
     }
 
-    public function getOptionListAttribute()
+    public function getOptionList()
     {
         return $this->options
                     ->map( function($item) {
@@ -143,5 +135,15 @@ class Poll extends Model
             ->get()[0]->cnt;
     }
 
-
+    /**
+     * Check if user has voted
+     */
+    public function hasVoted($user)
+    {
+        return $this->join('options','options.poll_id','=','polls.id')
+            ->join('votes','votes.option_id','=','options.id')
+            ->where('votes.user_id','=',$user->id)
+            ->select('votes.option_id')
+            ->get()->isNotEmpty();
+    }
 }

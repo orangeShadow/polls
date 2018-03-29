@@ -32,13 +32,6 @@ class TestCase extends OrchestraTestCase
 
     }
 
-
-
-    public function testAsserTrue()
-    {
-        $this->assertTrue(true);
-    }
-
     protected function getPackageProviders($app)
     {
         return ['OrangeShadow\Polls\ServiceProvider'];
