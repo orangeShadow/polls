@@ -9,12 +9,12 @@ if (is_array(config('polls.admin_route_middleware'))) {
 }
 
 
-$public_prefix = config('polls.admin_route_prefix');
+$public_prefix = config('polls.public_route_prefix');
 
-if (is_array(config('polls.admin_route_middleware'))) {
-    $public_middleware = array_merge(config('polls.public_route_middleware'),['auth','bindings']);
+if (is_array(config('polls.public_route_middleware'))) {
+    $public_middleware = array_merge(config('polls.public_route_middleware'),['bindings']);
 } else {
-    $public_middleware = ['bindings'];
+    $public_middleware = ['auth','bindings'];
 }
 
 
