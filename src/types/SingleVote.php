@@ -1,4 +1,5 @@
 <?php
+
 namespace OrangeShadow\Polls\Types;
 
 use OrangeShadow\Polls\Exceptions\AlreadyCastYourVoteException;

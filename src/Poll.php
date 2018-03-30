@@ -132,8 +132,8 @@ class Poll extends Model
     {
         return $this->join('options','options.poll_id','=','polls.id')
             ->join('votes','votes.option_id','=','options.id')
-            ->select(\DB::raw('count(DISTINCT votes.user_id) as cnt'))
             ->where('polls.id',$this->id)
+            ->select(\DB::raw('count(DISTINCT votes.user_id) as cnt')) 
             ->get()[0]->cnt;
     }
 

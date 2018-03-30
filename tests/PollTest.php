@@ -83,6 +83,8 @@ class PollTest extends TestCase
                      ->select('option_id', 'user_id', 'weight')
                      ->get();
 
+
+                     
         $this->assertEquals($poll->getVotes(), $votes->toArray());
     
     }
