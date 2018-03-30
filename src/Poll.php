@@ -120,6 +120,7 @@ class Poll extends Model
         return $this->join('options','options.poll_id','=','polls.id')
                         ->join('votes','votes.option_id','=','options.id')
                         ->select(['votes.option_id','votes.user_id','weight'])
+                        ->where('polls.id',$this->id)
                         ->get()->toArray();
     }
 
@@ -132,6 +133,7 @@ class Poll extends Model
         return $this->join('options','options.poll_id','=','polls.id')
             ->join('votes','votes.option_id','=','options.id')
             ->select(\DB::raw('count(DISTINCT votes.user_id) as cnt'))
+            ->where('polls.id',$this->id)
             ->get()[0]->cnt;
     }
 
@@ -143,6 +145,7 @@ class Poll extends Model
         return $this->join('options','options.poll_id','=','polls.id')
             ->join('votes','votes.option_id','=','options.id')
             ->where('votes.user_id','=',$user->id)
+            ->where('polls.id',$this->id)
             ->select('votes.option_id')
             ->get()->isNotEmpty();
     }
