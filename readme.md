@@ -60,13 +60,13 @@ admin route:
     DELETE: /admin/option/{option}  Remove option
  
    
-public get vote with options and result if user did voted
+public route for get poll with options (and result if user did voted)
 
 [Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API) 
 
     POST: poll/{poll}
     
-public vote (only for auth user)
+public route for  voting (only for auth user)
 
 [Poll API](https://github.com/orangeShadow/polls/wiki/Poll--API) 
 
