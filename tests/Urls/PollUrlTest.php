@@ -9,6 +9,18 @@ use OrangeShadow\Polls\Test\TestCase;
 
 class PollUrlTest extends TestCase
 {
+    protected $pollSingle;
+    protected $pollMulti;
+    protected $pollVariable;
+    protected $user;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->seedPolls();
+    }
+
 
     public function testPollStoreUrl()
     {
@@ -33,35 +45,26 @@ class PollUrlTest extends TestCase
 
     public function testPollShowUrl()
     {
-        $data = [
-            'title'     => 'Who is the best football player in the world?',
-            'active'    => 1,
-            'anonymous' => 0,
-            'position'  => 1,
-            'type'      => 'OrangeShadow\\Polls\\Types\\SingleVote',
-        ];
-        $poll = Poll::create ($data);
-
-
+    
+        $poll = $this->pollSingle;
         $user = User::find(1);
-
         $this->actingAs($user)
             ->get('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [ 'Accept' => 'application/json' ])
             ->assertStatus(200)
-            ->assertJsonStructure(['id', 'options','results']);
+            ->assertJsonStructure(['id', 'options','results'])
+            ->assertJson(['id'=>$poll->id]);
     }
 
     public function testPollShowPublicUrl()
     {
-        $data = [
-            'title'     => 'Who is the best football player in the world?',
-            'active'    => 1,
-            'anonymous' => 0,
-            'position'  => 1,
-            'type'      => 'OrangeShadow\\Polls\\Types\\SingleVote',
-        ];
-        $poll = Poll::create ($data);
+        $poll = $this->pollSingle;
 
+        $options = $poll->options->shuffle()->pluck('id')->toArray();
+
+        $results = $this->actingAs($this->user)->post("/poll/{$this->pollVariable->id}/vote", [
+            'options' => $options,
+            'Accept' => 'application/json'
+        ]);
 
         $user = User::find(1);
 
@@ -74,18 +77,10 @@ class PollUrlTest extends TestCase
 
     public function testPollUpdateUrl()
     {
-        $data = [
-            'title'     => 'Who is the best soccer player in the world?',
-            'active'    => 1,
-            'anonymous' => 0,
-            'position'  => 1,
-            'type'      => 'OrangeShadow\\Polls\\Types\\SingleVote',
-        ];
-        $poll = Poll::create ($data);
-
-
+        $poll = $this->pollSingle;
         $user = User::find(1);
 
+        $data=$poll->getAttributes();
         $data['title'] = 'Who is the best football player in the world?';
 
         $this->actingAs($user)->put('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id,$data, [
@@ -93,27 +88,53 @@ class PollUrlTest extends TestCase
         ])->assertStatus(200)->assertJson($data);
 
 
-        $this->assertDatabaseHas('polls', $data);
+        $this->assertDatabaseHas('polls', ['id'=>$poll->id,'title'=>$data['title']]);
     }
 
     public function testPollDeleteUrl()
     {
-        $data = [
-            'title'     => 'Who is the best soccer player in the world?',
-            'active'    => 1,
-            'anonymous' => 0,
-            'position'  => 1,
-            'type'      => 'OrangeShadow\\Polls\\Types\\SingleVote',
-        ];
-        $poll = Poll::create ($data);
-
+        $poll = $this->pollSingle;
 
         $user = User::find(1);
 
 
-        $this->actingAs($user)->delete('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id,$data, [
-            'Accept'        => 'application/json'
-        ])->assertStatus(200)->assertJson(['success'=>true]);
+        $this->actingAs($user)
+            ->delete('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [
+                'Accept'        => 'application/json'
+            ])
+            ->assertStatus(200)->assertJson(['success'=>true]);
+
+
+        $this->assertDatabaseMissing('polls', ['id'=>$poll->id]);
+    }
+
+
+    public function testPollWithVoteDelete()
+    {
+        $poll = $this->pollSingle;
+
+        $user = User::find(1);
+        $user2 = User::find(2);
+
+        $option = $poll->options->random();
+
+        $this->actingAs($user)->post("/poll/{$poll->id}/vote", [
+            'options' => [$option->id],
+            'Accept' => 'application/json'
+        ]);
+
+        $this->actingAs($user2)->post("/poll/{$poll->id}/vote", [
+            'options' => [$poll->options->random()->id],
+            'Accept' => 'application/json'
+        ]);
+
+
+        $this->actingAs($user)
+            ->delete('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [
+                'Accept'        => 'application/json'
+            ])
+            ->assertStatus(200)
+            ->assertJson(['success'=>true]);
 
 
         $this->assertDatabaseMissing('polls', ['id'=>$poll->id]);
