@@ -45,9 +45,10 @@ class PollUrlTest extends TestCase
 
         $user = User::find(1);
 
-        $this->actingAs($user)->get('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [
-            'Accept'        => 'application/json'
-        ])->assertStatus(200)->assertJson($data);
+        $this->actingAs($user)
+            ->get('/'.config('polls.public_route_prefix').'/poll/'.$poll->id, [ 'Accept' => 'application/json' ])
+            ->assertStatus(200)
+            ->assertJsonStructure(['poll', 'options']);
     }
 
 
