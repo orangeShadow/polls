@@ -70,9 +70,9 @@ class PollController extends Controller
      */
     public function show(Poll $poll,Request $request)
     {                
-        $poll = $poll->toArray();            
-        $poll['options'] = $poll->getOptionList();
-        $poll['results'] = app()->make('PollProxy', ['poll' => $poll])->getResult(); 
+        $response = $poll->toArray();            
+        $response['options'] = $poll->getOptionList();
+        $response['results'] = app()->make('PollProxy', ['poll' => $poll])->getResult(); 
         return response($response);
     }
 

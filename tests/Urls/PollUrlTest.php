@@ -46,6 +46,26 @@ class PollUrlTest extends TestCase
         $user = User::find(1);
 
         $this->actingAs($user)
+            ->get('/'.config('polls.admin_route_prefix').'/poll/'.$poll->id, [ 'Accept' => 'application/json' ])
+            ->assertStatus(200)
+            ->assertJsonStructure(['id', 'options','results']);
+    }
+
+    public function testPollShowPublicUrl()
+    {
+        $data = [
+            'title'     => 'Who is the best football player in the world?',
+            'active'    => 1,
+            'anonymous' => 0,
+            'position'  => 1,
+            'type'      => 'OrangeShadow\\Polls\\Types\\SingleVote',
+        ];
+        $poll = Poll::create ($data);
+
+
+        $user = User::find(1);
+
+        $this->actingAs($user)
             ->get('/'.config('polls.public_route_prefix').'/poll/'.$poll->id, [ 'Accept' => 'application/json' ])
             ->assertStatus(200)
             ->assertJsonStructure(['poll', 'options']);
