@@ -3,7 +3,6 @@
 namespace OrangeShadow\Polls;
 
 use OrangeShadow\Polls\Poll;
-use OrangeShadow\Polls\Exceptions\PollIsClosedException;
 
 abstract class PollTypeAbstract
 {
@@ -12,9 +11,6 @@ abstract class PollTypeAbstract
 
     public function __construct(Poll $poll)
     {
-        if ($poll->isClosed())
-            throw new PollIsClosedException();
-
         $this->poll = $poll;
     }
 

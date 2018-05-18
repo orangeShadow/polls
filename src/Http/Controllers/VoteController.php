@@ -4,6 +4,7 @@ namespace OrangeShadow\Polls\Http\Controllers;
 use OrangeShadow\Polls\Exceptions\Exception;
 use Illuminate\Http\Request;
 use OrangeShadow\Polls\Poll;
+use OrangeShadow\Polls\Exceptions\PollIsClosedException;
 
 class VoteController extends Controller
 {
@@ -29,9 +30,13 @@ class VoteController extends Controller
     public function vote(Poll $poll,Request $request)
     {
         try {
+
             $this->validate($request, $this->validateFields, [], $this->customAttributes());
 
             $pollWriter = app()->make('PollProxy', ['poll' => $poll]);
+
+            if ($poll->isClosed())
+                throw new PollIsClosedException();
 
             $pollWriter->voting($request->user()->id, $request->get('options'));
 
