@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'routing' => true,
     'admin_route_prefix'           => 'admin',
     'admin_route_middleware' => [
         'auth'

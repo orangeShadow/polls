@@ -17,6 +17,8 @@ run migration
 
 polls.php
 
+```routing``` - enable or disable routing
+
 ```admin_route_prefix``` - prefix for manage polls API route
 
 ```admin_route_middleware```  - array middleware for manage polls route
